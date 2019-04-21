@@ -59,25 +59,13 @@ class CaminhaoSchema(ma.Schema):
 caminhao_schema = CaminhaoSchema(strict=True)
 caminhoes_schema = CaminhaoSchema(many=True, strict=True)
 
-@app.route('/api/v1/caminhoes', methods=['GET'])
-def get_caminhoes():
+@api.route('/api/v1/caminhoes')
+def get():
   all_caminhoes = Caminhao.query.all()
   result = caminhoes_schema.dump(all_caminhoes)
   return jsonify(result.data)
-
-@app.route('/api/v1/caminhoes/<int:id>', methods=['GET'])
-def get_caminhao(id):
-  caminhao = [caminhao for caminhao in caminhoes if caminhao['id'] == id]
-  if len(caminhao) == 0:
-    abort(404)
-  caminhao = Caminhao.query.get(id)
-  return caminhao_schema.jsonify(caminhao)
-
-@app.route('/api/v1/caminhoes', methods=['POST'])
-def adicionar_caminhao():
-  if request.method == "POST":
-    novo_caminhao = Caminhao(request.form.get('id'), request.form.get('tipo'))
-    
+def post():
+  novo_caminhao = Caminhao(request.form.get('id'), request.form.get('tipo'))    
   db.session.add(novo_caminhao)
   db.session.commit()
   return caminhao_schema.jsonify(novo_caminhao)
