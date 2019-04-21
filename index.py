@@ -1,6 +1,6 @@
 # app.py
 from flask import Flask, jsonify, abort, make_response, request
-from flask_sqlalchemy import SQLAlchemy 
+from sqlalchemy import SQLAlchemy 
 from flask_marshmallow import Marshmallow 
 from flask_restplus import Resource, Api, fields
 from werkzeug.contrib.fixers import ProxyFix
