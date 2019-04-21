@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow 
 from flask_restplus import Resource, Api, fields
 from werkzeug.contrib.fixers import ProxyFix
-from database import db_session
 from models import BlogPost
 
 app = Flask(__name__)
@@ -15,10 +14,24 @@ api = Api(app,
           description='This is our sample API'
 )
 
+POSTGRES = {
+    'user': 'cfqvhzyn',
+    'pw': 'X20fx0vIQGCM4-tMeRkQRY1LoZ4RDkWw',
+    'db': 'cfqvhzyn',
+    'host': 'otto.db.elephantsql.com',
+    'port': '5432',
+}
+
+app.config['DEBUG'] = True
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:\%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 # Init db
 db = SQLAlchemy(app)
 # Init ma
 ma = Marshmallow(app)
+
+db.init_app(app)
 
 class Caminhao(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -58,8 +71,8 @@ def adicionar_caminhao():
   tipo = request.json['tipo']
   
   novo_caminhao = Caminhao(tipo)
-  db_session.add(novo_caminhao)
-  db_session.commit()
+  db.session.add(novo_caminhao)
+  db.session.commit()
 
   return caminhao_schema.jsonify(novo_caminhao)
 
