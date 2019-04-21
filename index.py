@@ -31,7 +31,7 @@ POSTGRES = {
 }
 
 app.config['DEBUG'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:\%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://cfqvhzyn:X20fx0vIQGCM4-tMeRkQRY1LoZ4RDkWw@otto.db.elephantsql.com:5432/cfqvhzyn'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Init db
