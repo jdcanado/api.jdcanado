@@ -78,7 +78,8 @@ def adicionar_caminhao():
   tipo = request.form.get("tipo")
   id = request.form.get("id")
   
-  novo_caminhao = Caminhao(id, tipo)
+  novo_caminhao.id = id
+  novo_caminhao.tipo = tipo
   db.session.add(novo_caminhao)
   db.session.commit()
   return caminhao_schema.jsonify(novo_caminhao)
