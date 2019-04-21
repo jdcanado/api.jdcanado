@@ -59,13 +59,15 @@ class CaminhaoSchema(ma.Schema):
 caminhao_schema = CaminhaoSchema(strict=True)
 caminhoes_schema = CaminhaoSchema(many=True, strict=True)
 
-@api.route('/api/v1/caminhoes')
+@app.route('/api/v1/caminhoes', methods=['GET'])
 def get():
   all_caminhoes = Caminhao.query.all()
   result = caminhoes_schema.dump(all_caminhoes)
   return jsonify(result.data)
+
+@app.route('/api/v1/caminhoes', methods=['POST'])
 def post():
-  novo_caminhao = Caminhao(request.form.get('id'), request.form.get('tipo'))    
+  novo_caminhao = Caminhao(3, 'Caminhão Toco')    
   db.session.add(novo_caminhao)
   db.session.commit()
   return caminhao_schema.jsonify(novo_caminhao)
