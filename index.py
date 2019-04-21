@@ -61,7 +61,7 @@ def adicionar_caminhao():
   db_session.add(novo_caminhao)
   db_session.commit()
 
-return caminhao_schema.jsonify(novo_caminhao)
+  return caminhao_schema.jsonify(novo_caminhao)
 
 @api.route('/hello_world')
 class HelloWorld(Resource):
