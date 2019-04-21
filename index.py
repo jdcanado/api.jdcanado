@@ -1,11 +1,11 @@
 # app.py
 from flask import Flask, jsonify, abort, make_response, request
-from sqlalchemy import SQLAlchemy 
+from flask_sqlalchemy import SQLAlchemy 
 from flask_marshmallow import Marshmallow 
 from flask_restplus import Resource, Api, fields
 from werkzeug.contrib.fixers import ProxyFix
 from database import db_session
-from models import BlogPost, Caminhao
+from models import BlogPost
 
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
