@@ -46,7 +46,7 @@ class Caminhao(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   tipo = db.Column(db.String(100), unique=True)
   
-  def __init__(self, id, tipo):
+  def __init__(id, tipo):
     self.id = id
     self.tipo = tipo
     
