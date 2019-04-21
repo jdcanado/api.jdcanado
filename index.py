@@ -1,10 +1,18 @@
 # app.py
 from flask import Flask, jsonify, abort, make_response, request
 from flask_sqlalchemy import SQLAlchemy 
+import importlib.machinery
+from distutils.sysconfig import get_python_lib
 from flask_marshmallow import Marshmallow 
 from flask_restplus import Resource, Api, fields
 from werkzeug.contrib.fixers import ProxyFix
 from models import BlogPost
+
+# if local environment, use psycopg2 installed in python library (site-packages), otherwise use from binary (psycopg2 subdirectory in this folder)
+try:
+    psycopg2 = importlib.machinery.SourceFileLoader('psycopg2', get_python_lib()+'/psycopg2/__init__.py').load_module()
+except:
+    import psycopg2
 
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
@@ -28,10 +36,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Init db
 db = SQLAlchemy(app)
+db.init_app(app)
+
 # Init ma
 ma = Marshmallow(app)
-
-db.init_app(app)
 
 class Caminhao(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -92,9 +100,9 @@ class BlogPosts(Resource):
     def get(self, **kwargs):
         return BlogPost.query.all()
 
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    db_session.remove()
+#@app.teardown_appcontext
+#def shutdown_session(exception=None):
+#    db_session.remove()
 
 if __name__ == '__main__':
     app.run(debug=True)
