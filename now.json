@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "barebone-serverless-api-zeit-now",
+    "name": "api.jdcanado",
     "builds": [
         { "src": "*.py", "use": "@liudonghua123/now-flask" , "config": { "maxLambdaSize": "30mb" } }
     ],
