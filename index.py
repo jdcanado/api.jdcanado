@@ -75,19 +75,12 @@ def get_caminhao(id):
 
 @app.route('/api/v1/caminhoes', methods=['POST'])
 def adicionar_caminhao():
-  if not request.json or not 'tipo' in request.json:
-        abort(400)
-        
-  if not request.json or not 'id' in request.json:
-        abort(400)
-
   tipo = request.json['tipo']
   id = request.json['id']
   
   novo_caminhao = Caminhao(id, tipo)
   db.session.add(novo_caminhao)
   db.session.commit()
-
   return caminhao_schema.jsonify(novo_caminhao)
 
 @api.route('/hello_world')
