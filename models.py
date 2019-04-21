@@ -17,3 +17,16 @@ blog_posts = Table('blog_posts', metadata,
 )
 
 mapper(BlogPost, blog_posts)
+
+class Caminhao(object):
+    query = db_session.query_property()
+    def __init__(self, id=None, tipo=None):
+        self.id = id
+        self.tipo = tipo
+        
+caminhao = Table('caminhao', metadata,
+    Column('id', Integer, primary_key=True),
+    Column('tipo', Text)
+)
+
+mapper(Caminhao, caminhao)
