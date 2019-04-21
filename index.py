@@ -46,7 +46,8 @@ class Caminhao(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   tipo = db.Column(db.String(100), unique=True)
   
-  def __init__(self, tipo):
+  def __init__(self, id, tipo):
+    self.id = id
     self.tipo = tipo
     
 # Caminhao Schema
@@ -76,10 +77,13 @@ def get_caminhao(id):
 def adicionar_caminhao():
   if not request.json or not 'tipo' in request.json:
         abort(400)
+        
+  if not request.json or not 'id' in request.json:
+        abort(400)
 
-  tipo = request.json['tipo']
+  tipo = request.json['id', 'tipo']
   
-  novo_caminhao = Caminhao(tipo)
+  novo_caminhao = Caminhao(id, tipo)
   db.session.add(novo_caminhao)
   db.session.commit()
 
