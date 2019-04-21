@@ -75,7 +75,7 @@ def get_caminhao(id):
 
 @app.route('/api/v1/caminhoes', methods=['POST'])
 def adicionar_caminhao():
-  novo_caminhao = Caminhao(id = request.form.get("id"), tipo = request.form.get("tipo"))
+  novo_caminhao = Caminhao(request.form.get("id"), request.form.get("tipo"))
   db.session.add(novo_caminhao)
   db.session.commit()
   return caminhao_schema.jsonify(novo_caminhao)
