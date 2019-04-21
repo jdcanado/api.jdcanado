@@ -81,7 +81,8 @@ def adicionar_caminhao():
   if not request.json or not 'id' in request.json:
         abort(400)
 
-  tipo = request.json['id', 'tipo']
+  tipo = request.json['tipo']
+  id = request.json['id']
   
   novo_caminhao = Caminhao(id, tipo)
   db.session.add(novo_caminhao)
