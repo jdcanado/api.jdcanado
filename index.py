@@ -69,7 +69,7 @@ def get():
 def post():
   #content = request.get_json(silent=True)  
   #print(content)  
-  novo_caminhao = Caminhao(4, 'teste')  
+  novo_caminhao = Caminhao(4, "teste")  
   db.session.add(novo_caminhao)
   db.session.commit()
   return caminhao_schema.jsonify(novo_caminhao)
