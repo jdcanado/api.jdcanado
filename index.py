@@ -67,7 +67,9 @@ def get():
 
 @app.route('/api/v1/caminhoes', methods=['POST'])
 def post():
-  caminhao = Caminhao(request.form.get('id'), request.form.get('tipo'))  
+  content = request.get_json(silent=True)  
+  print(content)  
+  caminhao = Caminhao(content['id'], content['tipo'])  
   db.session.add(novo_caminhao)
   db.session.commit()
   return caminhao_schema.jsonify(novo_caminhao)
@@ -88,11 +90,6 @@ class BlogPosts(Resource):
     def get(self, **kwargs):
         return BlogPost.query.all()
     
-    @api.marshal_with(model, envelope='resource')
-    def post():
-        caminhao = Caminhao(request.json['id'], request.json['tipo'])
-        return jsonify(caminhao)
-
 #@app.teardown_appcontext
 #def shutdown_session(exception=None):
 #    db_session.remove()
