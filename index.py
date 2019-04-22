@@ -68,11 +68,11 @@ def get():
 @app.route('/api/v1/caminhoes', methods=['POST'])
 def post():
   if request.method == 'POST':
-    print(request.get_json())
-    novo_caminhao = request.get_json()    
-    db.session.add(novo_caminhao)
-    db.session.commit()
-    return caminhao_schema.jsonify(novo_caminhao)
+    print(request)
+    #novo_caminhao = request.get_json()    
+    #db.session.add(novo_caminhao)
+    #db.session.commit()
+    #return caminhao_schema.jsonify(novo_caminhao)
 
 @api.route('/hello_world')
 class HelloWorld(Resource):
