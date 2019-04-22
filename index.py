@@ -66,8 +66,8 @@ def get():
   return jsonify(result.data)
 
 @app.route('/api/v1/caminhoes', methods=['POST'])
-def post():
-  novo_caminhao = Caminhao(4,'Caminhão Teste')    
+def post(self):
+  caminhao = Caminhao(id = self.id, tipo = self.tipo)  
   db.session.add(novo_caminhao)
   db.session.commit()
   return caminhao_schema.jsonify(novo_caminhao)
