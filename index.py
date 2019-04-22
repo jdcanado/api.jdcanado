@@ -87,6 +87,11 @@ class BlogPosts(Resource):
     @api.marshal_with(model, envelope='resource')
     def get(self, **kwargs):
         return BlogPost.query.all()
+    
+    @api.marshal_with(model, envelope='resource')
+    def post():
+        caminhao = Caminhao(request.json['id'], request.json['tipo'])
+        return jsonify(caminhao)
 
 #@app.teardown_appcontext
 #def shutdown_session(exception=None):
