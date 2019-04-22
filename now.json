@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "api.jdcanado",
+    "name": "api_jdcanado",
     "builds": [
         { "src": "*.py", "use": "@liudonghua123/now-flask" , "config": { "maxLambdaSize": "30mb" } }
     ],
