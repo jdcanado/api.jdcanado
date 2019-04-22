@@ -67,6 +67,8 @@ def get():
 
 @app.route('/api/v1/caminhoes', methods=['POST'])
 def post():
+  content = request.get_json(silent=True)  
+  print(content)  
   novo_caminhao = Caminhao(4, "teste 2")  
   db.session.add(novo_caminhao)
   db.session.commit()
