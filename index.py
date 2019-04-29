@@ -65,9 +65,9 @@ def get():
   result = caminhoes_schema.dump(all_caminhoes)
   return jsonify(result.data)
 
-@app.route('/api/v1/caminhoes', methods=['POST'])
-def post():
-  return jsonify(request.json)
+#@app.route('/api/v1/caminhoes', methods=['POST'])
+#def post():
+#  return jsonify(request.json)
 
 @api.route('/hello_world')
 class HelloWorld(Resource):
